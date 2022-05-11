@@ -4,7 +4,9 @@ const connectDB = require("./db/connect");
 require("dotenv").config();
 const tasks = require("./Routes/tasks");
 
+// Middlewares
 app.use(express.json());
+app.use(express.static("./public"));
 
 app.use("/api/v1/tasks", tasks);
 
