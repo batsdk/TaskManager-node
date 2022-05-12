@@ -3,19 +3,17 @@ const app = express();
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const tasks = require("./Routes/tasks");
-const notFound = require("./Middleware/notFound");
 
 // Middlewares
 app.use(express.json());
 app.use(express.static("./public")); // For frontend
+const notFound = require("./Middleware/notFound");
+const errorHandler = require("./Middleware/errorHandler");
 
 app.use("/api/v1/tasks", tasks);
 
 app.use(notFound);
-
-app.get("/hello", (req, res) => {
-  res.send("Some data have been sent");
-});
+app.use(errorHandler);
 
 const port = 3000;
 
