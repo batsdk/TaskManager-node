@@ -3,12 +3,15 @@ const app = express();
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const tasks = require("./Routes/tasks");
+const notFound = require("./Middleware/notFound");
 
 // Middlewares
 app.use(express.json());
-app.use(express.static("./public"));
+app.use(express.static("./public")); // For frontend
 
 app.use("/api/v1/tasks", tasks);
+
+app.use(notFound);
 
 app.get("/hello", (req, res) => {
   res.send("Some data have been sent");
